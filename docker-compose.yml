@@ -1,4 +1,0 @@
-client:
-  build: ./
-  volumes:
-    - .:/opt/api-client

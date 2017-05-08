@@ -2,7 +2,7 @@
 import sys
 import logging
 import requests
-from team_input import parse_team_file
+from team_input import parse_team_file, TeamInputException
 from api import PredictionApi, PredictionApiException
 
 def check_arguments():
@@ -37,7 +37,7 @@ def get_teams_output(input_file, api_host):
                 sys.stdout.write('T')
             else:
                 sys.stdout.write('F')
-    except (FileNotFoundError, PredictionApiException) as error:
+    except (FileNotFoundError, PredictionApiException, TeamInputException) as error:
         logging.error(str(error))
         sys.exit(1)
     except (requests.exceptions.ConnectionError, requests.exceptions.ConnectTimeout):

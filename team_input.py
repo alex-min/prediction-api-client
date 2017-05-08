@@ -1,4 +1,6 @@
 
+class TeamInputException(Exception):
+    pass
 
 def parse_team_file(filename):
     with open(filename, 'r') as team_file:
@@ -8,6 +10,7 @@ def parse_team_file(filename):
         if line == '':
             continue
         if line.count('&') != 1:
-            raise AttributeError('The input file is invalid, every line should contain only one &')
+            error = 'The input file {} is invalid, every line should contain only one &'.format(filename)
+            raise TeamInputException(error)
         teams.append([team.strip() for team in line.split('&')])
     return teams
