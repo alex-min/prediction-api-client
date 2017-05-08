@@ -16,8 +16,6 @@ class PredictionApi():
                 error = "Got a {} status from the API: {}".format(api_result.status_code, api_result.text)
                 raise PredictionApiException(error)
             return int(api_result.text)
-        except (requests.exceptions.MissingSchema, requests.exceptions.InvalidSchema) as error:
-          raise PredictionApiException(str(error))
         except (requests.exceptions.ConnectionError, requests.exceptions.ConnectTimeout):
           raise PredictionApiException("Unable to contact the api at {}.".format(self.host))
 
